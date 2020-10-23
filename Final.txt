@@ -1,0 +1,170 @@
+﻿/Grecia Pacheco A01366730
+Clear
+/Condicion fin de ciclo
+Ciclo,Load contS1
+Skipcond 400
+Jump PideSensor
+Jump Ciclo2
+Ciclo2, Load contS2
+Skipcond 400
+Jump PideSensor
+Jump end
+
+/Define el sensor que recibe la señal
+PideSensor, Input
+Store sensor
+Load sensor
+Skipcond 400
+Jump RegSensor2
+Jump RegSensor1
+/Registro sensor 1
+RegSensor1,Load contS1
+Skipcond 400
+Jump S1
+Jump Ciclo
+
+S1,Load contS1
+Subt uno
+Store contS1
+Input
+StoreI regSensor1
+Load numS1
+Add uno
+Store numS1
+Load sensor
+StoreI iniS1
+LoadI totalS1
+AddI regSensor1
+StoreI totalS1
+LoadI totalS1
+StoreI auxiliar
+Jump CalculaMedia
+
+CalculaMedia,LoadI auxiliar
+Subt numS1
+StoreI auxiliar
+Skipcond 800
+Jump Reg1
+
+LoadI res
+Add uno
+StoreI res
+Jump CalculaMedia
+
+Reg1,LoadI res
+add uno
+StoreI res
+Load iniS1
+Add uno
+Store iniS1
+LoadI res
+StoreI iniS1
+Load iniS1
+Add uno
+Store iniS1
+LoadI regSensor1
+StoreI iniS1
+LoadI res
+Load iniS1
+Add uno
+Store iniS1
+StoreI medS1Tot
+Jump fin1
+
+fin1, Load cero
+StoreI regSensor1
+Load cero
+StoreI res
+Load cero
+StoreI auxiliar
+Jump Ciclo
+/Registro sensor 2
+RegSensor2,Load contS2
+Skipcond 400
+Jump S2
+Jump Ciclo
+
+S2,Load contS2
+Subt uno
+Store contS2
+Input
+StoreI regSensor2
+Load numS2
+Add uno
+Store numS2
+Load sensor
+StoreI iniS2
+LoadI totalS2
+AddI regSensor2
+StoreI totalS2
+LoadI totalS2
+StoreI auxiliar
+Jump CalculaMedia2
+
+CalculaMedia2,LoadI auxiliar
+Subt numS2
+StoreI auxiliar
+Skipcond 800
+Jump Reg2
+
+LoadI res
+Add uno
+StoreI res
+Jump CalculaMedia2
+
+Reg2, LoadI res
+Add uno
+StoreI res
+Load iniS2
+Add uno
+Store iniS2
+LoadI res
+StoreI iniS2
+Load iniS2
+Add uno
+Store iniS2
+LoadI regSensor2
+StoreI iniS2
+LoadI res
+Load iniS2
+Add uno
+Store iniS2
+StoreI medS2Tot
+Jump fin2
+
+fin2, Load cero
+StoreI regSensor2
+Load cero
+StoreI res
+Load cero
+StoreI auxiliar
+Jump Ciclo
+
+end,LoadI medS1Tot
+Output
+LoadI medS2Tot
+Output
+Halt
+
+/Generales
+sensor,HEX 0
+iniS1,HEX 100
+iniS2,HEX 140
+medS1Tot, HEX 0F0
+medS2Tot, HEX 0F1
+/Calcular media
+regTemp, HEX 0F2
+totalS1, HEX 0F3
+totalS2, HEX 0F4
+numS1, HEX 0
+numS2, HEX 0
+regSensor1, HEX 0F7
+regSensor2, HEX 0F8
+auxiliar, HEX 0F9
+res, HEX 0FA
+/contador general
+contS1, DEC 4
+contS2, DEC 4
+/ Constantes
+uno, DEC 1
+cero, HEX 0
